@@ -1,0 +1,28 @@
+# Test Patterns — ALU_DFT Fault Detection Test Set
+#
+# These are the 10 patterns applied against every modeled stuck-at
+# fault in fault_tb.sv. Each pattern is (a, b, opcode) -> exercises
+# one ALU operation. The set was hand-picked to cover every opcode at
+# least once, plus corner cases (zero operands, all-ones operands,
+# overflow, borrow) that are more likely to expose faults that a
+# "typical" input might mask.
+#
+# opcode key: 0=ADD  1=SUB  2=AND  3=OR  4=XOR
+#
+# format: a, b, opcode   # purpose
+
+3,  2,  0   # ADD, normal case
+15, 1,  0   # ADD, overflow (tests carry-out path)
+5,  5,  1   # SUB, result == 0 (tests zero flag / result==0 path)
+0,  1,  1   # SUB, borrow case (0 - 1, tests borrow/negative path)
+12, 10, 2   # AND, normal case
+0,  0,  2   # AND, both operands zero
+12, 10, 3   # OR, normal case
+15, 15, 3   # OR, all-ones operands
+12, 10, 4   # XOR, normal case
+9,  9,  4   # XOR, identical operands -> result == 0
+
+# Result: all 8 modeled stuck-at faults (result[0..3], stuck-at-0 and
+# stuck-at-1) were detected by this pattern set. See
+# stuck_at_faults.md for the fault model and fault_coverage.py's
+# report for the full per-fault breakdown.

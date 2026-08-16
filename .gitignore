@@ -1,0 +1,5 @@
+*.vcd
+*.wlf
+*.log
+work/
+transcript
