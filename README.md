@@ -37,7 +37,7 @@ ALU_DFT/
 │   ├── scan_tb.sv         scan shift/capture verification
 │   ├── dft_assertions.sv  continuous SVA protocol checks (bound to alu_scan)
 │   └── fault_tb.sv        stuck-at fault injection and detection
-├── atpg/
+├── fault_Analysis/
 │   ├── stuck_at_faults.md fault model explanation
 │   ├── test_patterns.txt  the 10 test patterns used
 │   └── fault_coverage.py  parses fault_results.log into a formatted report
